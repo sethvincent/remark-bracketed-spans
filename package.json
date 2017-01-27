@@ -1,0 +1,38 @@
+{
+  "name": "remark-bracketed-spans",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "remark": "^6.2.0",
+    "remark-html": "^5.1.0",
+    "remark-stringify": "^2.3.0",
+    "standard": "^8.6.0",
+    "tape": "^4.6.3",
+    "unist-util-remove": "^0.2.1",
+    "unist-util-visit": "^1.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node tests/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sethvincent/remark-bracketed-spans.git"
+  },
+  "keywords": [
+    "remark",
+    "pandoc",
+    "bracketed",
+    "spans"
+  ],
+  "author": "sethvincent",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sethvincent/remark-bracketed-spans/issues"
+  },
+  "homepage": "https://github.com/sethvincent/remark-bracketed-spans#readme"
+}

@@ -1,1 +1,1 @@
-[text in the span]{.class .other-class key=val another=example}
+[text in the span]{#id .class .other-class key=val another=example}

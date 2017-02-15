@@ -7,6 +7,7 @@
     "test": "tests"
   },
   "dependencies": {
+    "rehype-remark": "github:sethvincent/rehype-remark",
     "remark": "^6.2.0",
     "remark-html": "^5.1.0",
     "remark-stringify": "^2.3.0",

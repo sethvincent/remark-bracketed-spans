@@ -61,7 +61,7 @@ function md2html (processor) {
 }
 
 function createSpan (classes, id, data, children) {
-  classes = classes.join(' ')
+  classes = classes ? classes.join(' ') : ''
 
   var data = Object.keys(data).map(function (key) {
     return `data-${key}="${data[key]}"`
@@ -133,7 +133,7 @@ function hasDataAttr (props) {
 }
 
 /* clean up md output */
-function mdVisitor (processor) {
+function mdVisitors (processor) {
   var Compiler = processor.Compiler
   var visitors = Compiler.prototype.visitors
   var text = visitors.text
@@ -157,5 +157,5 @@ function mdVisitor (processor) {
 module.exports = {
   md2html: md2html,
   html2md: html2md,
-  mdVisitor: mdVisitor
+  mdVisitors: mdVisitors
 }

@@ -36,11 +36,11 @@ function parseMarkdown (node, i, parent, tree) {
 
   if (node.type &&
     node.type === 'linkReference' &&
-    node.children && node.children[0].value &&
+    node.children &&
     parent.children[i + 1].value &&
     parent.children[i + 1].value.match(/\{(.+)\}/).length
   ) {
-    var text = node.children[0].value
+    var text = node.children && node.children[0] && node.children[0].value
     var value = parent.children[i + 1].value
     var data = {
       id: null,
@@ -50,7 +50,7 @@ function parseMarkdown (node, i, parent, tree) {
 
     var idMatch = value.match(/\#\w+/)
     var classMatch = value.match(/\.\w+(\-)?\w+/g)
-    var attrMatch = value.match(/([^=]\w+)=([^=]\w+\s*)/g)
+    var attrMatch = value.match(/(?:\w*=\s*(?:(?:"[^"]*")|(?:'[^']*')|[^}\s]+))/g)
     var bracketMatch = value.match(/\{(.+)\}/)
 
     if (idMatch) {
@@ -66,8 +66,8 @@ function parseMarkdown (node, i, parent, tree) {
     if (attrMatch) {
       attrMatch.map(function (item) {
         var split = item.split('=')
-        var key = split[0].trim()
-        var val = split[1].trim()
+        var key = split[0].trim().replace('{', '')
+        var val = split[1].trim().replace(/"/g, '')
         data.attr[key] = val
       })
     }

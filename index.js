@@ -1,7 +1,8 @@
 var visit = require('unist-util-visit')
 var remove = require('unist-util-remove')
 
-function md2html (processor) {
+function md2html () {
+  var processor = this
   return function transformer (tree) {
     visit(tree,   function visitor (node, i, parent) {
       if (!node.children) return
@@ -27,7 +28,7 @@ function md2html (processor) {
 }
 
 /*
-* if a bracket span statement is found: returns an object 
+* if a bracket span statement is found: returns an object
 * with id, classList, attr, and children properties
 * else returns false
 */
@@ -158,7 +159,8 @@ function hasDataAttr (props) {
 }
 
 /* clean up md output */
-function mdVisitors (processor) {
+function mdVisitors () {
+  var processor = this
   var Compiler = processor.Compiler
   var visitors = Compiler.prototype.visitors
   var text = visitors.text

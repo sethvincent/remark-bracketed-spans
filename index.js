@@ -177,9 +177,7 @@ function mdVisitors () {
   }
 }
 
-module.exports = {
-  md2html: md2html,
-  html2md: html2md,
-  mdVisitors: mdVisitors,
-  parseMarkdown: parseMarkdown
-}
+module.exports = md2html
+md2html.html2md = html2md
+md2html.mdVisitors = mdVisitors
+md2html.parseMarkdown = parseMarkdown

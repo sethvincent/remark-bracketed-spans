@@ -49,7 +49,7 @@ var bracketedSpans = require('remark-bracketed-spans')
 
 var md = '[text in the span]{.class .other-class key=val another=example}'
 
-var html = remark().use(bracketedSpans.md2html).use(toHTML).processSync(md).toString()
+var html = remark().use(bracketedSpans).use(toHTML).processSync(md).toString()
 
 console.log(html)
 ```

@@ -7,18 +7,20 @@
     "test": "tests"
   },
   "dependencies": {
-    "rehype-remark": "github:sethvincent/rehype-remark",
-    "remark": "^6.2.0",
-    "remark-html": "^5.1.0",
-    "remark-stringify": "^2.3.0",
-    "standard": "^8.6.0",
-    "tape": "^4.6.3",
     "unist-util-remove": "^0.2.1",
     "unist-util-visit": "^1.1.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "rehype-remark": "github:sethvincent/rehype-remark",
+    "remark": "^7.0.0",
+    "remark-html": "^6.0.0",
+    "remark-stringify": "^3.0.0",
+    "rehype": "^4.0.0",
+    "standard": "^9.0.0",
+    "tape": "^4.6.3"
+  },
   "scripts": {
-    "test": "node tests/index.js"
+    "test": "standard && node tests/index.js"
   },
   "repository": {
     "type": "git",

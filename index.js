@@ -1,9 +1,9 @@
 var visit = require('unist-util-visit')
 var remove = require('unist-util-remove')
 
-function md2html (processor) {
+function md2html () {
   return function transformer (tree) {
-    visit(tree,   function visitor (node, i, parent) {
+    visit(tree, function visitor (node, i, parent) {
       if (!node.children) return
       var data = parseMarkdown(node, i, parent, tree)
 
@@ -27,7 +27,7 @@ function md2html (processor) {
 }
 
 /*
-* if a bracket span statement is found: returns an object 
+* if a bracket span statement is found: returns an object
 * with id, classList, attr, and children properties
 * else returns false
 */
@@ -48,10 +48,9 @@ function parseMarkdown (node, i, parent, tree) {
       attr: {}
     }
 
-    var idMatch = value.match(/\#\w+/)
-    var classMatch = value.match(/\.\w+(\-)?\w+/g)
+    var idMatch = value.match(/#\w+/)
+    var classMatch = value.match(/\.\w+(-)?\w+/g)
     var attrMatch = value.match(/(?:\w*=\s*(?:(?:"[^"]*")|(?:'[^']*')|[^}\s]+))/g)
-    var bracketMatch = value.match(/\{(.+)\}/)
 
     if (idMatch) {
       data.id = idMatch[0].replace('#', '')
@@ -76,23 +75,21 @@ function parseMarkdown (node, i, parent, tree) {
     data.trailingText = value.split('}')[1]
     data.html = createSpan(data)
     return data
-  } else  {
+  } else {
     return false
   }
 }
 
 function createSpan (data) {
   var classes = data.classList ? data.classList.join(' ') : ''
-  var children = data.children
   var text = data.text
-  var attrs = data.attrs
   var id = data.id
 
   var attr = Object.keys(data.attr).map(function (key) {
     return `data-${key}="${data.attr[key]}"`
   }).join(' ')
 
-  return `<span${id ? ` id="${id}"` : ''} ${classes ? `class="${classes}"` : ''} ${attr ? attr : ''}>${text}</span>`
+  return `<span${id ? ` id="${id}"` : ''} ${classes ? `class="${classes}"` : ''} ${attr || ''}>${text}</span>`
 }
 
 function html2md () {
@@ -100,7 +97,7 @@ function html2md () {
     visit(tree, visitor)
   }
 
-  function visitor(node, index, parent) {
+  function visitor (node, index, parent) {
     if (
       node.tagName &&
       node.tagName === 'span' &&
@@ -158,7 +155,8 @@ function hasDataAttr (props) {
 }
 
 /* clean up md output */
-function mdVisitors (processor) {
+function mdVisitors () {
+  var processor = this
   var Compiler = processor.Compiler
   var visitors = Compiler.prototype.visitors
   var text = visitors.text
@@ -179,9 +177,7 @@ function mdVisitors (processor) {
   }
 }
 
-module.exports = {
-  md2html: md2html,
-  html2md: html2md,
-  mdVisitors: mdVisitors,
-  parseMarkdown: parseMarkdown
-}
+module.exports = md2html
+md2html.html2md = html2md
+md2html.mdVisitors = mdVisitors
+md2html.parseMarkdown = parseMarkdown

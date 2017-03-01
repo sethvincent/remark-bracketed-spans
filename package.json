@@ -20,7 +20,7 @@
     "tape": "^4.6.3"
   },
   "scripts": {
-    "test": "node tests/index.js"
+    "test": "standard && node tests/index.js"
   },
   "repository": {
     "type": "git",

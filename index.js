@@ -49,7 +49,7 @@ function parseMarkdown (node, i, parent, tree) {
     }
 
     var idMatch = value.match(/#\w+/)
-    var classMatch = value.match(/\.\w+(-)?\w+/g)
+    var classMatch = value.match(/\.(\w-?)+\w+/g)
     var attrMatch = value.match(/(?:\w*=\s*(?:(?:"[^"]*")|(?:'[^']*')|[^}\s]+))/g)
 
     if (idMatch) {
